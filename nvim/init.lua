@@ -27,7 +27,7 @@ require('lazy').setup({
   {
     'voldikss/vim-floaterm',
     keys = {
-      { "<leader>lg", "<cmd>FloatermNew --width=0.85 --height=0.85 lazygit <cr>", desc = "NeoTree" },
+      { "<leader>lg", "<cmd>FloatermNew --width=0.85 --height=0.85 lazygit <cr>", desc = "Launch lazygit in Floaterm" },
     },
     -- config = function()
     --   require("vim-floaterm").setup()
@@ -553,9 +553,7 @@ vim.keymap.set('n', '<leader>e', function() vim.cmd.Neotree 'reveal=true' end,
 vim.keymap.set('n', '<leader>ff', function() vim.cmd.Telescope 'find_files' end,
   { desc = 'Focus current file in NvimTree' })
 
-vim.keymap.set('n', '<leader>tt', function()
-  vim.cmd.TodoTelescope()
-end, { desc = 'Show TODOs in Telescope' })
+vim.keymap.set('n', '<leader>tt', function() vim.cmd.TodoTelescope() end, { desc = 'Show TODOs in Telescope' })
 
 -- Search in project / git root
 vim.keymap.set('n', '<leader>fw', function() vim.cmd.LiveGrepGitRoot() end, { desc = 'Fuzzy find in git project' })
