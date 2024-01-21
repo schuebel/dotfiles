@@ -21,25 +21,14 @@ vim.keymap.set('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagn
 -- end, { desc = ' Open lazygit' })
 
 -- vim.keymap.set('n', '<C-n>', function() vim.cmd.Neotree 'toggle' end, { desc = 'Toggle NeoTree' })
-vim.keymap.set('n', '<leader>e', function() vim.cmd.Neotree 'reveal=true' end,
-	{ desc = 'Show current file in NeoTree' })
+-- vim.keymap.set('n', '<leader>e', function() vim.cmd.Neotree 'reveal=true' end,
+-- 	{ desc = 'Show current file in NeoTree' })
 
 -- vim.keymap.set('n', '<leader>e', function()
 --   vim.cmd.NvimTreeFocus()
 -- end, { desc = 'Focus current file in NvimTree' })
 
-vim.keymap.set('n', '<leader>ff', function() vim.cmd.Telescope 'find_files' end,
-	{ desc = 'Focus current file in NvimTree' })
 
-vim.keymap.set('n', '<leader>tt', function() vim.cmd.TodoTelescope() end, { desc = 'Show TODOs in Telescope' })
-
--- Search in project / git root
-vim.keymap.set('n', '<leader>fw', function() vim.cmd.LiveGrepGitRoot() end, { desc = 'Fuzzy find in git project' })
-
--- Telescope keymaps
-vim.keymap.set('n', '<leader>tk', function() vim.cmd.Telescope 'keymaps' end, { desc = 'Telescope keymaps' })
-
--- Barbar Buffer Tabs
 vim.keymap.set('n', '<Tab>', function() vim.cmd.bnext() end, { desc = 'Next Buffer' })
 vim.keymap.set('n', '<S-Tab>', function() vim.cmd.bprevious() end, { desc = 'Previous Buffer' })
 vim.keymap.set('n', '<leader>x', function() vim.cmd.bdelete() end, { desc = 'Close Buffer' })

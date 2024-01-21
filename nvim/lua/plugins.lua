@@ -32,10 +32,31 @@ require('lazy').setup({
 	},
 	--
 	-- Useful plugin to show you pending keybinds.
-	'folke/which-key.nvim',
+	{
+		'folke/which-key.nvim',
+		config = function()
+			-- document existing key chains
+			require('which-key').register {
+				['<leader>c'] = { name = '[C]ode', _ = 'which_key_ignore' },
+				['<leader>d'] = { name = '[D]ocument', _ = 'which_key_ignore' },
+				['<leader>g'] = { name = '[G]it', _ = 'which_key_ignore' },
+				['<leader>h'] = { name = 'Git [H]unk', _ = 'which_key_ignore' },
+				['<leader>r'] = { name = '[R]ename', _ = 'which_key_ignore' },
+				['<leader>s'] = { name = '[S]earch', _ = 'which_key_ignore' },
+				['<leader>t'] = { name = '[T]oggle', _ = 'which_key_ignore' },
+				['<leader>w'] = { name = '[W]orkspace', _ = 'which_key_ignore' },
+			}
+			-- register which-key VISUAL mode
+			-- required for visual <leader>hs (hunk stage) to work
+			require('which-key').register({
+				['<leader>'] = { name = 'VISUAL <leader>' },
+				['<leader>h'] = { 'Git [H]unk' },
+			}, { mode = 'v' })
+		end
+	},
 
 	-- Detect tabstop and shiftwidth automatically
-	'tpope/vim-sleuth',
+	{ 'tpope/vim-sleuth',      lazy = false },
 
 	-- NOTE: This is where your plugins related to LSP can be installed.
 	--  The configuration is done below. Search for lspconfig to find it below.
@@ -46,7 +67,8 @@ require('lazy').setup({
 	{
 		"nvim-neo-tree/neo-tree.nvim",
 		keys = {
-			{ "<C-n>", "<cmd>Neotree toggle<cr>", desc = "NeoTree" },
+			{ "<C-n>",     "<cmd>Neotree toggle<cr>",      desc = "NeoTree" },
+			{ '<leader>e', "<cmd>Neotree reveal=true<cr>", desc = 'NeoTree: Reveal file' },
 		},
 		config = function()
 			require("neo-tree").setup()
@@ -433,17 +455,4 @@ require('lazy').setup({
 			},
 		},
 	},
-	-- NOTE: Next Step on Your Neovim Journey: Add/Configure additional "plugins" for kickstart
-	--       These are some example plugins that I've included in the kickstart repository.
-	--       Uncomment any of the lines below to enable them.
-	-- require 'kickstart.plugins.autoformat',
-	-- require 'kickstart.plugins.debug',
-
-	-- NOTE: The import below can automatically add your own plugins, configuration, etc from `lua/custom/plugins/*.lua`
-	--    You can use this folder to prevent any conflicts with this init.lua if you're interested in keeping
-	--    up-to-date with whatever is in the kickstart repo.
-	--    Uncomment the following line and add your plugins to `lua/custom/plugins/*.lua` to get going.
-	--
-	--    For additional information see: https://github.com/folke/lazy.nvim#-structuring-your-plugins
-	-- { import = 'custom.plugins' },
 }, { defaults = { lazy = true } })
