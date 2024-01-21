@@ -17,8 +17,7 @@ require('lazy').setup({
 	-- NOTE: First, some plugins that don't require any configuration
 
 	-- Git related plugins
-	-- 'tpope/vim-fugitive',
-	'tpope/vim-rhubarb',
+	-- 'tpope/vim-rhubarb',
 
 	-- Floaterm is required for calling lazygit inside nvim
 	{
@@ -57,9 +56,6 @@ require('lazy').setup({
 
 	-- Detect tabstop and shiftwidth automatically
 	{ 'tpope/vim-sleuth', lazy = false },
-
-	-- NOTE: This is where your plugins related to LSP can be installed.
-	--  The configuration is done below. Search for lspconfig to find it below.
 
 	-- measure startup time
 	'dstein64/vim-startuptime',
