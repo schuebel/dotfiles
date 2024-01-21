@@ -56,7 +56,7 @@ require('lazy').setup({
 	},
 
 	-- Detect tabstop and shiftwidth automatically
-	{ 'tpope/vim-sleuth',      lazy = false },
+	{ 'tpope/vim-sleuth', lazy = false },
 
 	-- NOTE: This is where your plugins related to LSP can be installed.
 	--  The configuration is done below. Search for lspconfig to find it below.
@@ -376,18 +376,19 @@ require('lazy').setup({
 		},
 	},
 
+	-- Add indentation guides even on blank lines
 	{
-		-- Add indentation guides even on blank lines
 		'lukas-reineke/indent-blankline.nvim',
-		-- Enable `lukas-reineke/indent-blankline.nvim`
-		-- See `:help ibl`
 		main = 'ibl',
 		lazy = false,
 		opts = {},
 	},
 
-	-- "gc" to comment visual regions/lines
-	{ 'numToStr/Comment.nvim', lazy = false, opts = { toggler = { line = '<leader>/' } } },
+	{
+		'numToStr/Comment.nvim',
+		lazy = false,
+		opts = { toggler = { line = '<leader>/' } }
+	},
 
 	-- Fuzzy Finder (files, lsp, etc)
 	{
