@@ -33,6 +33,7 @@ require('lazy').setup({
 	-- Useful plugin to show you pending keybinds.
 	{
 		'folke/which-key.nvim',
+		lazy = false,
 		config = function()
 			-- document existing key chains
 			require('which-key').register {
@@ -66,9 +67,6 @@ require('lazy').setup({
 			{ "<C-n>",     "<cmd>Neotree toggle<cr>",      desc = "NeoTree" },
 			{ '<leader>e', "<cmd>Neotree reveal=true<cr>", desc = 'NeoTree: Reveal file' },
 		},
-		config = function()
-			require("neo-tree").setup()
-		end,
 		branch = "v3.x",
 		dependencies = {
 			"nvim-lua/plenary.nvim",
