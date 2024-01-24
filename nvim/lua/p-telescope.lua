@@ -85,3 +85,4 @@ vim.keymap.set('n', '<leader>sc', require('telescope.builtin').git_bcommits,
 vim.keymap.set('n', '<leader>sC', require('telescope.builtin').git_commits,
 	{ desc = '[S]earch git [C]ommits on directory' })
 vim.keymap.set('n', '<leader>tt', function() vim.cmd.TodoTelescope() end, { desc = 'Show TODOs in Telescope' })
+-- vim.keymap.set('n', '<leader>sp', function() vim.cmd.CdProject() end, { desc = '[S]earch [p]rojects' })

@@ -49,7 +49,3 @@ vim.keymap.set('n', '<leader>x', function() vim.cmd.bdelete() end, { desc = 'Clo
 --
 vim.keymap.set('c', 'qq', 'qa')
 vim.keymap.set('n', ';', ':')
-
--- Comment linewiese in visual mode
-vim.keymap.set('v', '<leader>/', "<ESC><cmd>lua require('Comment.api').toggle.linewise(vim.fn.visualmode())<CR>",
-	{ desc = 'BarBar: Restore Buffer' })

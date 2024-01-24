@@ -35,3 +35,13 @@ vim.opt.scrolloff = 8
 
 -- Disable intro
 vim.opt.shortmess = 'I'
+
+-- Split new windows below
+vim.opt.splitbelow = true
+
+-- Tab handling
+vim.opt.tabstop = 4
+
+-- Use tabstop value to determine shiftwidth
+vim.opt.shiftwidth = 0
+vim.opt.expandtab = true

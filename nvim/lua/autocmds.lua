@@ -7,10 +7,10 @@ autocmd('VimResized', {
 })
 -- treat Jenkinsfile as groovy
 -- BufNewFile,BufRead Jenkinsfile setf groovy
--- autocmd({ 'BufRead', 'BufNewFile' }, {
--- 	pattern = '*enkinsfile',
--- 	command = 'setfiletype groovy',
--- })
+autocmd({ 'BufRead', 'BufNewFile' }, {
+	pattern = '*enkinsfile',
+	command = 'setfiletype groovy',
+})
 
 -- close NvimTree, otherwise possession crashes -_-
 -- vim.cmd [[

@@ -19,6 +19,12 @@ require('lazy').setup({
 	-- Git related plugins
 	-- 'tpope/vim-rhubarb',
 
+	{
+		"wolandark/Mitra-Vim",
+		config = function()
+			vim.cmd.colorscheme('Mitra')
+		end
+	},
 	-- Floaterm is required for calling lazygit inside nvim
 	{
 		'voldikss/vim-floaterm',
@@ -56,8 +62,40 @@ require('lazy').setup({
 	},
 
 	-- Detect tabstop and shiftwidth automatically
-	{ 'tpope/vim-sleuth', lazy = false },
+	{
+		'tpope/vim-sleuth', lazy = false
+	},
 
+	{
+		'numToStr/Comment.nvim',
+		keys = "<leader>/",
+		config = function()
+			require('Comment').setup()
+			vim.keymap.set('n', '<leader>/', function()
+				require('Comment.api').toggle.linewise.current()
+			end)
+			vim.keymap.set('v', '<leader>/',
+				"<ESC><cmd>lua require('Comment.api').toggle.linewise(vim.fn.visualmode())<CR>",
+				{ desc = 'Toggle comment in visual mode' })
+		end,
+		opts = { toggler = { line = '<leader>/' } }
+	},
+
+	-- 	{
+	-- 		"alexshelto/boringcomment.nvim",
+	-- 		lazy = false,
+	-- 		config = function()
+	-- 			local boringcomment = require("boringcomment.commenter")
+	-- 			vim.keymap.set('x', "<leader>/", function()
+	-- 				boringcomment.comment_visual_selection()
+	-- 			end)
+
+	-- 			vim.keymap.set('n', "<leader>/", function()
+	-- 				boringcomment.comment_current_line()
+	-- 			end)
+	-- 		end
+	-- 	},
+	--
 	-- measure startup time
 	'dstein64/vim-startuptime',
 
@@ -123,9 +161,10 @@ require('lazy').setup({
 			{ 'j-hui/fidget.nvim', opts = {} },
 
 			-- Additional lua configuration, makes nvim stuff amazing!
-			'folke/neodev.nvim',
 		},
 	},
+
+	{ 'folke/neodev.nvim', lazy = false, config = function() require('neodev').setup() end },
 
 	{
 		'ggandor/leap.nvim',
@@ -378,11 +417,6 @@ require('lazy').setup({
 		opts = {},
 	},
 
-	{
-		'numToStr/Comment.nvim',
-		lazy = false,
-		opts = { toggler = { line = '<leader>/' } }
-	},
 
 	-- Fuzzy Finder (files, lsp, etc)
 	{
@@ -405,8 +439,8 @@ require('lazy').setup({
 		},
 	},
 
+	-- Highlight, edit, and navigate code
 	{
-		-- Highlight, edit, and navigate code
 		'nvim-treesitter/nvim-treesitter',
 		dependencies = {
 			'nvim-treesitter/nvim-treesitter-textobjects',
@@ -415,7 +449,6 @@ require('lazy').setup({
 	},
 
 	-- Autoformat plugin
-
 	{
 		'stevearc/conform.nvim',
 		event = 'BufWritePre', -- load the plugin before saving
@@ -450,4 +483,14 @@ require('lazy').setup({
 			},
 		},
 	},
+
+	-- Pick project (really just a directory switcher)
+	-- Telescope integration in progress: https://github.com/LintaoAmons/cd-project.nvim
+	{
+		"LintaoAmons/cd-project.nvim",
+		keys = '<leader>sp',
+		config = function()
+			vim.keymap.set('n', "<leader>sp", function() vim.cmd.CdProject() end)
+		end,
+	}
 }, { defaults = { lazy = true } })
