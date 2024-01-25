@@ -31,7 +31,6 @@ local function find_git_root()
 
 	-- Find the Git root directory from the current file's path
 	local git_root = vim.fn.systemlist('git -C ' .. vim.fn.escape(current_dir, ' ') .. ' rev-parse --show-toplevel')
-	    [1]
 	if vim.v.shell_error ~= 0 then
 		print 'Not a git repository. Searching on current working directory'
 		return cwd
@@ -69,6 +68,7 @@ local function telescope_live_grep_open_files()
 		prompt_title = 'Live Grep in Open Files',
 	}
 end
+
 vim.keymap.set('n', '<leader>s/', telescope_live_grep_open_files, { desc = '[S]earch [/] in Open Files' })
 vim.keymap.set('n', '<leader>ss', require('telescope.builtin').builtin, { desc = '[S]earch [S]elect Telescope' })
 vim.keymap.set('n', '<leader>gf', require('telescope.builtin').git_files, { desc = 'Search [G]it [F]iles' })
