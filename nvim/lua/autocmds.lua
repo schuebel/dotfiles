@@ -12,14 +12,6 @@ autocmd({ 'BufRead', 'BufNewFile' }, {
 	command = 'setfiletype groovy',
 })
 
--- close NvimTree, otherwise possession crashes -_-
--- vim.cmd [[
--- augroup NvimTreeCloseAutocmd
---   autocmd!
---   autocmd VimLeavePre * NvimTreeClose
--- augroup END
--- ]]
---
 -- [[ Highlight on yank ]]
 -- See `:help vim.highlight.on_yank()`
 local highlight_group = vim.api.nvim_create_augroup('YankHighlight', { clear = true })
