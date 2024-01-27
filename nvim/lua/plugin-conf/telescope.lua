@@ -14,8 +14,6 @@ require('telescope').setup {
 -- Enable telescope fzf native, if installed
 pcall(require('telescope').load_extension, 'fzf')
 
--- Telescope live_grep in git root
--- Function to find the git root directory based on the current buffer's path
 local function find_git_root()
 	-- Use the current buffer's path as the starting point for the git search
 	local current_file = vim.api.nvim_buf_get_name(0)
@@ -30,14 +28,13 @@ local function find_git_root()
 	end
 
 	-- Find the Git root directory from the current file's path
-	local git_root = vim.fn.systemlist('git -C ' .. vim.fn.escape(current_dir, ' ') .. ' rev-parse --show-toplevel')
+	local git_root = vim.fn.systemlist('git -C ' .. vim.fn.escape(current_dir, ' ') .. ' rev-parse --show-toplevel')[1]
 	if vim.v.shell_error ~= 0 then
 		print 'Not a git repository. Searching on current working directory'
 		return cwd
 	end
 	return git_root
 end
-vim.api.nvim_create_user_command('GetGitRoot', find_git_root, {})
 
 -- Custom live_grep function to search in git root
 local function live_grep_git_root()
@@ -85,4 +82,3 @@ vim.keymap.set('n', '<leader>sc', require('telescope.builtin').git_bcommits,
 vim.keymap.set('n', '<leader>sC', require('telescope.builtin').git_commits,
 	{ desc = '[S]earch git [C]ommits on directory' })
 vim.keymap.set('n', '<leader>tt', function() vim.cmd.TodoTelescope() end, { desc = 'Show TODOs in Telescope' })
--- vim.keymap.set('n', '<leader>sp', function() vim.cmd.CdProject() end, { desc = '[S]earch [p]rojects' })
