@@ -1,24 +1,32 @@
 local autocmd = vim.api.nvim_create_autocmd
+local augroup = vim.api.nvim_create_augroup('MyAutocmds', { clear = true })
 
--- Auto resize panes when resizing nvim window
 autocmd('VimResized', {
+	desc = 'Auto resize panes when resizing nvim window',
+	group = augroup,
 	pattern = '*',
 	command = 'tabdo wincmd =',
 })
--- treat Jenkinsfile as groovy
--- BufNewFile,BufRead Jenkinsfile setf groovy
+
 autocmd({ 'BufRead', 'BufNewFile' }, {
+	desc = 'treat Jenkinsfile as groovy',
+	group = augroup,
 	pattern = '*enkinsfile',
 	command = 'setfiletype groovy',
 })
 
--- [[ Highlight on yank ]]
--- See `:help vim.highlight.on_yank()`
-local highlight_group = vim.api.nvim_create_augroup('YankHighlight', { clear = true })
-vim.api.nvim_create_autocmd('TextYankPost', {
+autocmd('BufReadPost', {
+	desc = 'Open file at the last position it was edited earlier',
+	group = augroup,
+	pattern = '*',
+	command = 'silent! normal! g`"zv'
+})
+
+autocmd('TextYankPost', {
+	desc = 'Highlight on yank',
+	group = augroup,
+	pattern = '*',
 	callback = function()
 		vim.highlight.on_yank()
 	end,
-	group = highlight_group,
-	pattern = '*',
 })
