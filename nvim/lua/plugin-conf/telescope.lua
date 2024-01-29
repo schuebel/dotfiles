@@ -81,4 +81,3 @@ vim.keymap.set('n', '<leader>sc', require('telescope.builtin').git_bcommits,
 	{ desc = '[S]earch git [c]ommits on buffer' })
 vim.keymap.set('n', '<leader>sC', require('telescope.builtin').git_commits,
 	{ desc = '[S]earch git [C]ommits on directory' })
-vim.keymap.set('n', '<leader>tt', function() vim.cmd.TodoTelescope() end, { desc = 'Show TODOs in Telescope' })

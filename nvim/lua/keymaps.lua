@@ -1,7 +1,3 @@
--- [[ Basic Keymaps ]]
-
--- Keymaps for better default experience
--- See `:help vim.keymap.set()`
 local k = vim.keymap.set
 k({ 'n', 'v' }, '<Space>', '<Nop>', { silent = true })
 
@@ -15,13 +11,14 @@ k('n', ']d', vim.diagnostic.goto_next, { desc = 'Go to next diagnostic message' 
 k('n', '[f', vim.diagnostic.open_float, { desc = 'Open floating diagnostic message' })
 k('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostics list' })
 
-
+-- Buffer navigation
 k('n', '<Tab>', function() vim.cmd.bnext() end, { desc = 'Next Buffer' })
 k('n', '<S-Tab>', function() vim.cmd.bprevious() end, { desc = 'Previous Buffer' })
 k('n', '<leader>x', function() vim.cmd.bdelete() end, { desc = 'Close Buffer' })
 
+
+-- misc
 k('c', 'qq', 'qa')
 k('n', ';', ':')
-
-
 k('n', '<C-c>', '<cmd> %y+ <CR>', { desc = 'Copy buffer to system clipboard' })
+k('n', '<leader>nb', '<cmd>enew<CR>', { desc = 'New Buffer' })
