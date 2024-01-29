@@ -313,6 +313,7 @@ require('lazy').setup({
                 python = { 'ruff_format' },
                 sh = { 'shfmt' },
                 javascript = { 'prettier' },
+                json = { 'jq' }
             },
             -- enable format-on-save
             format_on_save = {
