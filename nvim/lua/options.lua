@@ -47,3 +47,11 @@ vim.opt.tabstop      = 4
 -- Use tabstop value to determine shiftwidth
 vim.opt.shiftwidth   = 0
 vim.opt.expandtab    = true
+
+-- Detect Jenkinsfile as a Groovy Filetype
+vim.filetype.add {
+	filename = {
+		['Jenkinsfile'] = 'groovy',
+		['jenkinsfile'] = 'groovy',
+	},
+}

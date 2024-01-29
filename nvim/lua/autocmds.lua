@@ -8,13 +8,6 @@ autocmd('VimResized', {
 	command = 'tabdo wincmd =',
 })
 
-autocmd({ 'BufRead', 'BufNewFile' }, {
-	desc = 'treat Jenkinsfile as groovy',
-	group = augroup,
-	pattern = '*enkinsfile',
-	command = 'setfiletype groovy',
-})
-
 autocmd('BufReadPost', {
 	desc = 'Open file at the last position it was edited earlier',
 	group = augroup,
