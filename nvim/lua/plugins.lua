@@ -106,15 +106,7 @@ require('lazy').setup({
     {
         "folke/todo-comments.nvim",
         dependencies = { "nvim-lua/plenary.nvim" },
-        keys = {
-            {
-                '<leader>tt',
-                function()
-                    require('todo-comments').setup()
-                end,
-                desc = 'Telescope Todos',
-            },
-        },
+        keys = { { '<leader>tt', "<cmd>TodoTelescope<cr>", desc = 'Telescope Todos', }, },
         opts = {},
     },
 
@@ -307,7 +299,7 @@ require('lazy').setup({
     {
         'stevearc/conform.nvim',
         event = 'BufWritePre', -- load the plugin before saving
-        keys = '<leader>fm',
+        keys = { { '<leader>fm', function() require('conform').format() end, desc = 'Format current buffer', }, },
         opts = {
             formatters_by_ft = {
                 python = { 'ruff_format' },
