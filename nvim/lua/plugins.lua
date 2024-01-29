@@ -310,8 +310,6 @@ require('lazy').setup({
         keys = '<leader>fm',
         opts = {
             formatters_by_ft = {
-                -- python = { "isort", "black" },
-                -- python = { 'black' },
                 python = { 'ruff_format' },
                 sh = { 'shfmt' },
                 javascript = { 'prettier' },
@@ -346,6 +344,5 @@ require('lazy').setup({
 
 -- load some more plugin specific stuff
 require("plugin-conf.treesitter")
-require("plugin-conf.lsp")
 require("plugin-conf.languages")
 require("plugin-conf.telescope")
