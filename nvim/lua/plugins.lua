@@ -25,7 +25,10 @@ require('lazy').setup({
     -- Useful plugin to show you pending keybinds.
     {
         'folke/which-key.nvim',
-        lazy = false,
+        keys = {
+            { "<leader>tk", "<cmd>Telescope keymaps<CR>", desc = "Telescope keymaps" },
+        },
+
         config = function()
             -- document existing key chains
             require('which-key').register {
@@ -44,7 +47,8 @@ require('lazy').setup({
                 ['<leader>'] = { name = 'VISUAL <leader>' },
                 ['<leader>h'] = { 'Git [H]unk' },
             }, { mode = 'v' })
-        end
+        end,
+
     },
 
     -- Detect tabstop and shiftwidth automatically
@@ -70,6 +74,12 @@ require('lazy').setup({
     -- file tree
     {
         "nvim-neo-tree/neo-tree.nvim",
+        init = function()
+            if vim.fn.argc(-1) == 1 then
+                local stat = vim.loop.fs_stat(vim.fn.argv(0))
+                if stat and stat.type == "directory" then require("neo-tree").setup({ filesystem = { hijack_netrw_behavior = "open_current", }, }) end
+            end
+        end,
         keys = {
             { "<C-n>",     "<cmd>Neotree toggle<cr>",      desc = "NeoTree" },
             { '<leader>e', "<cmd>Neotree reveal=true<cr>", desc = 'NeoTree: Reveal file' },
@@ -83,6 +93,7 @@ require('lazy').setup({
             -- "3rd/image.nvim", -- Optional image support in preview window: See `# Preview Mode` for more information
         },
         opts = {
+            hijack_netrw_behavior = 'open_current',
             enable_diagnostics = false,
             filtered_items = {
                 hide_gitignored = false,
@@ -126,7 +137,13 @@ require('lazy').setup({
         },
     },
 
-    { 'folke/neodev.nvim', lazy = false, config = function() require('neodev').setup() end },
+    {
+        'folke/neodev.nvim',
+        lazy = false,
+        config = function()
+            require('neodev').setup()
+        end
+    },
 
     {
         'ggandor/leap.nvim',
@@ -148,9 +165,6 @@ require('lazy').setup({
             -- Adds LSP completion capabilities
             'hrsh7th/cmp-nvim-lsp',
             'hrsh7th/cmp-path',
-
-            -- Adds a number of user-friendly snippets
-            -- 'rafamadriz/friendly-snippets',
         },
     },
 
@@ -234,7 +248,7 @@ require('lazy').setup({
     {
         "folke/tokyonight.nvim",
         lazy = false,
-        priority = 1000,
+        priority = 100,
         opts = {},
         config = function()
             vim.cmd.colorscheme 'tokyonight'
