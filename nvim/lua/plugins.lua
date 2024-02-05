@@ -14,6 +14,24 @@ vim.opt.rtp:prepend(lazypath)
 
 require('lazy').setup({
 
+    {
+        "christoomey/vim-tmux-navigator",
+        lazy = false,
+        cmd = {
+            "TmuxNavigateLeft",
+            "TmuxNavigateDown",
+            "TmuxNavigateUp",
+            "TmuxNavigateRight",
+            "TmuxNavigatePrevious",
+        },
+        keys = {
+            { "<M-h>",  "<cmd>TmuxNavigateLeft<cr>" },
+            { "<M-j>",  "<cmd>TmuxNavigateDown<cr>" },
+            { "<M-k>",  "<cmd>TmuxNavigateUp<cr>" },
+            { "<M-l>",  "<cmd>TmuxNavigateRight<cr>" },
+            { "<M-\\>", "<cmd>TmuxNavigatePrevious<cr>" },
+        },
+    },
     -- Floaterm is required for calling lazygit inside nvim
     {
         'voldikss/vim-floaterm',
@@ -52,9 +70,9 @@ require('lazy').setup({
     },
 
     -- Detect tabstop and shiftwidth automatically
-    {
-        'tpope/vim-sleuth', lazy = false
-    },
+    -- {
+    --     'tpope/vim-sleuth', lazy = false
+    -- },
 
     {
         'numToStr/Comment.nvim',
@@ -116,6 +134,7 @@ require('lazy').setup({
 
     {
         "folke/todo-comments.nvim",
+        lazy = false,
         dependencies = { "nvim-lua/plenary.nvim" },
         keys = { { '<leader>tt', "<cmd>TodoTelescope<cr>", desc = 'Telescope Todos', }, },
         opts = {},
@@ -135,6 +154,27 @@ require('lazy').setup({
 
             -- Additional lua configuration, makes nvim stuff amazing!
         },
+    },
+
+    {
+        '/WhoIsSethDaniel/mason-tool-installer',
+        lazy = false,
+        opts = {
+            ensure_installed = {
+                'pyright',
+                'dockerfile-language-server',
+                'lua-language-server',
+                'stylua',
+                'editorconfig-checker',
+                'shfmt',
+                'prettier',
+                'ruff',
+            },
+
+            run_on_start = true,
+            start_delay = 3000,
+        },
+        dependencies = 'williamboman/mason.nvim',
     },
 
     {
@@ -338,12 +378,14 @@ require('lazy').setup({
 
     {
         "LintaoAmons/cd-project.nvim",
+
         keys = {
             { "<leader>sp", "<cmd>CdProject<cr>", desc = "[S]earch [P]rojects" },
         },
         config = function()
             require("cd-project").setup({
-                projects_picker = "telescope"
+                projects_picker = "telescope",
+                projects_config_filepath = vim.fs.normalize(vim.fn.stdpath("config") .. "/cd-project.nvim.json"),
             })
         end
     }
