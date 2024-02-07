@@ -15,23 +15,44 @@ vim.opt.rtp:prepend(lazypath)
 require('lazy').setup({
 
     {
-        "christoomey/vim-tmux-navigator",
+        "alexghergh/nvim-tmux-navigation",
         lazy = false,
-        cmd = {
-            "TmuxNavigateLeft",
-            "TmuxNavigateDown",
-            "TmuxNavigateUp",
-            "TmuxNavigateRight",
-            "TmuxNavigatePrevious",
-        },
-        keys = {
-            { "<M-h>",  "<cmd>TmuxNavigateLeft<cr>" },
-            { "<M-j>",  "<cmd>TmuxNavigateDown<cr>" },
-            { "<M-k>",  "<cmd>TmuxNavigateUp<cr>" },
-            { "<M-l>",  "<cmd>TmuxNavigateRight<cr>" },
-            { "<M-\\>", "<cmd>TmuxNavigatePrevious<cr>" },
-        },
+        config = function()
+            local nvim_tmux_nav = require('nvim-tmux-navigation')
+
+            nvim_tmux_nav.setup {
+                disable_when_zoomed = true -- defaults to false
+            }
+
+            vim.keymap.set('n', "<a-h>", nvim_tmux_nav.NvimTmuxNavigateLeft)
+            vim.keymap.set('n', "<a-j>", nvim_tmux_nav.NvimTmuxNavigateDown)
+            vim.keymap.set('n', "<a-k>", nvim_tmux_nav.NvimTmuxNavigateUp)
+            vim.keymap.set('n', "<a-l>", nvim_tmux_nav.NvimTmuxNavigateRight)
+            vim.keymap.set('n', "<a-\\>", nvim_tmux_nav.NvimTmuxNavigateLastActive)
+            vim.keymap.set('n', "<a-Space>", nvim_tmux_nav.NvimTmuxNavigateNext)
+        end,
     },
+    -- {
+    --     "christoomey/vim-tmux-navigator",
+    --     lazy = false,
+    --     cmd = {
+    --         "TmuxNavigateLeft",
+    --         "TmuxNavigateDown",
+    --         "TmuxNavigateUp",
+    --         "TmuxNavigateRight",
+    --         -- "TmuxNavigatePrevious",
+    --     },
+    --     keys = {
+    --         -- { "<c-leader>h>", "<cmd>TmuxNavigateLeft<cr>" },
+    --         -- { "<c-leader>j>", "<cmd>TmuxNavigateDown<cr>" },
+    --         -- { "<c-leader>k",  "<cmd>TmuxNavigateUp<cr>" },
+    --         -- { "<c-leader>l",  "<cmd>TmuxNavigateRight<cr>" },
+    --         { "<a-h>", "<cmd>TmuxNavigateLeft<cr>" },
+    --         { "<a-j>", "<cmd>TmuxNavigateDown<cr>" },
+    --         { "<a-k",  "<cmd>TmuxNavigateUp<cr>" },
+    --         { "<a-l",  "<cmd>TmuxNavigateRight<cr>" },
+    --     },
+    -- },
     -- Floaterm is required for calling lazygit inside nvim
     {
         'voldikss/vim-floaterm',
@@ -338,8 +359,6 @@ require('lazy').setup({
             -- requirements installed.
             {
                 'nvim-telescope/telescope-fzf-native.nvim',
-                -- NOTE: If you are having trouble with this installation,
-                --       refer to the README for telescope-fzf-native for more instructions.
                 build = 'make',
                 cond = function()
                     return vim.fn.executable 'make' == 1

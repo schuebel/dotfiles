@@ -16,9 +16,21 @@ k('n', '<Tab>', function() vim.cmd.bnext() end, { desc = 'Next Buffer' })
 k('n', '<S-Tab>', function() vim.cmd.bprevious() end, { desc = 'Previous Buffer' })
 k('n', '<leader>x', function() vim.cmd.bdelete() end, { desc = 'Close Buffer' })
 
+-- Pane navigation
+k('n', '<C-H>', "<C-w>h", { desc = 'Focus pane to the left' })
+k('n', '<C-J>', "<C-w>j", { desc = 'Focus pane to the bottom' })
+k('n', '<C-K>', "<C-w>k", { desc = 'Focus pane to the top' })
+k('n', '<C-L>', "<C-w>l", { desc = 'Focus pane to the right' })
+
+k('n', '<C-A-\\>', "<cmd>vsp<CR>")
+k('n', '<A-`>', "<cmd>sp<CR>")
 
 -- misc
 k('c', 'qq', 'qa')
 k('n', ';', ':')
 k('n', '<C-c>', '<cmd> %y+ <CR>', { desc = 'Copy buffer to system clipboard' })
 k('n', '<leader>nb', '<cmd>enew<CR>', { desc = 'New Buffer' })
+
+
+-- docker
+k('n', '<leader>db', '<cmd>! docker build -t sync_dtr_to_git .<CR>', { desc = 'Docker build' })
