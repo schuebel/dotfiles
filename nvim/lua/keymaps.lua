@@ -30,6 +30,7 @@ k('c', 'qq', 'qa')
 k('n', ';', ':')
 k('n', '<C-c>', '<cmd> %y+ <CR>', { desc = 'Copy buffer to system clipboard' })
 k('n', '<leader>nb', '<cmd>enew<CR>', { desc = 'New Buffer' })
+k('n', '<leader>gy', '<cmd>YankParentDirPath<CR>', { desc = 'Copy parent directory of buffer to system clipboard' })
 
 
 -- docker
