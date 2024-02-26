@@ -19,6 +19,7 @@ if status is-interactive
   alias wttr2="curl -s 'wttr.in/st-leon-rot?format=v2'"
   alias sampler='sampler --config ~/.config/sampler/config.yml'
   alias g='git'
+  alias rlf='readlink -f'
 
   # FZF config
   # excludes are handled via $HOME/.ignore
@@ -34,5 +35,7 @@ if status is-interactive
   function dsh
     docker container exec -it $argv[1] /bin/bash
   end
+
+  zoxide init fish | source
 
 end
