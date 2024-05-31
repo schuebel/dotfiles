@@ -25,6 +25,14 @@ k('n', '<C-L>', "<C-w>l", { desc = 'Focus pane to the right' })
 k('n', '<C-A-\\>', "<cmd>vsp<CR>")
 k('n', '<A-`>', "<cmd>sp<CR>")
 
+-- Copilot
+k('n', '<leader>ch', '<cmd>Copilot help<CR>', { desc = 'Copilot: help' })
+k('n', '<leader>ce', '<cmd>Copilot enable<CR>', { desc = 'Copilot: enable' })
+k('n', '<leader>cd', '<cmd>Copilot disable<CR>', { desc = 'Copilot: disable' })
+k('n', '<leader>cp', '<cmd>Copilot panel<CR>', { desc = 'Copilot: panel' })
+k('i', '<C-u>', 'copilot#Accept("\\<CR>")', { desc = 'Copilot: use suggestion', expr = true, replace_keycodes = false })
+k('i', '<C-i>', '<Plug>(copilot-accept-word)', { desc = 'Copilot: use next suggested word' })
+
 -- misc
 k('c', 'qq', 'qa')
 k('n', ';', ':')

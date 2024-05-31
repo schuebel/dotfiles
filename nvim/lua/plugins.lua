@@ -64,6 +64,7 @@ require('lazy').setup({
     -- Useful plugin to show you pending keybinds.
     {
         'folke/which-key.nvim',
+        lazy = false,
         keys = {
             { "<leader>tk", "<cmd>Telescope keymaps<CR>", desc = "Telescope keymaps" },
         },
@@ -421,9 +422,22 @@ require('lazy').setup({
             require("cd-project").setup({
                 projects_picker = "telescope",
                 projects_config_filepath = vim.fs.normalize(vim.fn.stdpath("config") .. "/cd-project.nvim.json"),
+                choice_format = "path",
             })
         end
-    }
+    },
+
+    {
+        "github/copilot.vim",
+        config = function()
+            vim.g.copilot_no_tab_map = true
+        end,
+        keys = {
+            { "<leader>cl", function() print('Load Github CoPilot'); end, desc = "Copilot: load plugin" },
+        },
+    },
+
+
 }, { defaults = { lazy = true } })
 
 -- load some more plugin specific stuff
