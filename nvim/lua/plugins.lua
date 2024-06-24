@@ -183,6 +183,7 @@ require('lazy').setup({
         lazy = false,
         opts = {
             ensure_installed = {
+                'groovyls',
                 'pyright',
                 'dockerfile-language-server',
                 'lua-language-server',
@@ -200,11 +201,28 @@ require('lazy').setup({
     },
 
     {
-        'folke/neodev.nvim',
-        lazy = false,
-        config = function()
-            require('neodev').setup()
-        end
+        {
+            "folke/lazydev.nvim",
+            ft = "lua",
+            opts = {
+                library = {
+                    -- See the configuration section for more details
+                    -- Load luvit types when the `vim.uv` word is found
+                    { path = "luvit-meta/library", words = { "vim%.uv" } },
+                },
+            },
+        },
+        { "Bilal2453/luvit-meta", lazy = true }, -- optional `vim.uv` typings
+        {                                        -- optional completion source for require statements and module annotations
+            "hrsh7th/nvim-cmp",
+            opts = function(_, opts)
+                opts.sources = opts.sources or {}
+                table.insert(opts.sources, {
+                    name = "lazydev",
+                    group_index = 0, -- set group index to 0 to skip loading LuaLS completions
+                })
+            end,
+        },
     },
 
     {
@@ -362,6 +380,7 @@ require('lazy').setup({
         'nvim-telescope/telescope.nvim',
         branch = '0.1.x',
         dependencies = {
+            'nvim-telescope/telescope-live-grep-args.nvim',
             'nvim-lua/plenary.nvim',
             -- Fuzzy Finder Algorithm which requires local dependencies to be built.
             -- Only load if `make` is available. Make sure you have the system
@@ -437,6 +456,25 @@ require('lazy').setup({
         },
     },
 
+    {
+        "CopilotC-Nvim/CopilotChat.nvim",
+        branch = "canary",
+        dependencies = {
+            { "github/copilot.vim" },    -- or github/copilot.vim
+            { "nvim-lua/plenary.nvim" }, -- for curl, log wrapper
+        },
+        keys = {
+            { "<leader>cl", function() print('Load Github CoPilot'); end, desc = "Copilot: load plugin" },
+        },
+        window = {
+            width = 0.25,
+        },
+        opts = {
+            debug = true, -- Enable debugging
+            -- See Configuration section for rest
+        },
+        -- See Commands section for default commands if you want to lazy load on them
+    },
 
 }, { defaults = { lazy = true } })
 

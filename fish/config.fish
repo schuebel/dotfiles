@@ -5,7 +5,6 @@ if status is-interactive
   # vars
   export FZF_DEFAULT_COMMAND='rg --files --hidden --ignore-file ~/.ignore'
   # Aliases
-  alias vc='nvim -c "lua require(\'nvim-possession\').list()"'
   alias lg=lazygit
   alias ld=lazydocker
   alias p=python3
@@ -15,10 +14,6 @@ if status is-interactive
   alias la="ls -la --color=auto"
   alias ls='ls --color=auto'
   alias ..='cd ..'
-  alias wttr='curl wttr.in/st-leon-rot'
-  alias wttr2="curl -s 'wttr.in/st-leon-rot?format=v2'"
-  alias sampler='sampler --config ~/.config/sampler/config.yml'
-  alias g='git'
   alias rlf='readlink -f'
 
   # FZF config
@@ -37,5 +32,8 @@ if status is-interactive
   end
 
   zoxide init fish | source
+
+  # set Jenkins ENV vars
+  source ~/.set_jenkins_env_vars.sh
 
 end

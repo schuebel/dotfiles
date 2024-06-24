@@ -30,8 +30,20 @@ k('n', '<leader>ch', '<cmd>Copilot help<CR>', { desc = 'Copilot: help' })
 k('n', '<leader>ce', '<cmd>Copilot enable<CR>', { desc = 'Copilot: enable' })
 k('n', '<leader>cd', '<cmd>Copilot disable<CR>', { desc = 'Copilot: disable' })
 k('n', '<leader>cp', '<cmd>Copilot panel<CR>', { desc = 'Copilot: panel' })
+k('n', '<leader>cc', '<cmd>CopilotChatToggle<CR>', { desc = 'Copilot Chat: toggle' })
 k('i', '<C-u>', 'copilot#Accept("\\<CR>")', { desc = 'Copilot: use suggestion', expr = true, replace_keycodes = false })
 k('i', '<C-i>', '<Plug>(copilot-accept-word)', { desc = 'Copilot: use next suggested word' })
+k('n', '<leader>ccq', function()
+        local input = vim.fn.input("Quick Chat: ")
+        if input ~= "" then
+            require("CopilotChat").ask(input, { selection = require("CopilotChat.select").buffer })
+        end
+    end,
+    { desc = "CopilotChat - Quick chat" }
+)
+k('v', '<leader>cc', function()
+    require("CopilotChat").open()
+end, { desc = 'CopilotChat on selection' })
 
 -- misc
 k('c', 'qq', 'qa')

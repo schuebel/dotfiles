@@ -9,6 +9,7 @@ require('telescope').setup {
             },
         },
     },
+    require('telescope').load_extension("live_grep_args")
 }
 
 -- Enable telescope fzf native, if installed
@@ -74,7 +75,7 @@ vim.keymap.set('n', '<leader>sh', require('telescope.builtin').help_tags, { desc
 vim.keymap.set('n', '<leader>sw', require('telescope.builtin').grep_string, { desc = '[S]earch current [W]ord' })
 vim.keymap.set('n', '<leader>sg', require('telescope.builtin').live_grep, { desc = '[S]earch by [G]rep' })
 vim.keymap.set('n', '<leader>sd', require('telescope.builtin').diagnostics, { desc = '[S]earch [D]iagnostics' })
-vim.keymap.set('n', '<leader>sr', require('telescope.builtin').resume, { desc = '[S]earch [R]esume' })
+vim.keymap.set('n', '<leader>rs', require('telescope.builtin').resume, { desc = '[R]esume [S]earch' })
 vim.keymap.set('n', '<leader>tc', require('telescope.builtin').commands, { desc = '[T]elescope [C]ommands' })
 vim.keymap.set('n', '<leader>to', require('telescope.builtin').treesitter, { desc = '[T]elescope Treesitter [O]bjects' })
 vim.keymap.set('n', '<leader>fw', ':LiveGrepGitRoot<cr>', { desc = '[S]earch by [G]rep on Git Root' })
@@ -82,3 +83,5 @@ vim.keymap.set('n', '<leader>sc', require('telescope.builtin').git_bcommits,
     { desc = '[S]earch git [c]ommits on buffer' })
 vim.keymap.set('n', '<leader>sC', require('telescope.builtin').git_commits,
     { desc = '[S]earch git [C]ommits on directory' })
+vim.keymap.set("n", "<leader>sr", ":lua require('telescope').extensions.live_grep_args.live_grep_args()<CR>",
+    { desc = '[S]earch with [r]ipgrep - supports args' })
