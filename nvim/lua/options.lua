@@ -48,10 +48,5 @@ vim.opt.tabstop      = 4
 vim.opt.shiftwidth   = 0
 vim.opt.expandtab    = true
 
--- Detect Jenkinsfile as a Groovy Filetype
-vim.filetype.add {
-	filename = {
-		['Jenkinsfile'] = 'groovy',
-		['jenkinsfile'] = 'groovy',
-	},
-}
+-- treat jenkinsfiles as groovy files
+vim.cmd('autocmd BufNewFile,BufRead *.jenkinsfile,*.Jenkinsfile set filetype=groovy')

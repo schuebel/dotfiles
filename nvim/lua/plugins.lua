@@ -179,7 +179,7 @@ require('lazy').setup({
     },
 
     {
-        '/WhoIsSethDaniel/mason-tool-installer',
+        'WhoIsSethDaniel/mason-tool-installer',
         lazy = false,
         opts = {
             ensure_installed = {
