@@ -14,45 +14,6 @@ vim.opt.rtp:prepend(lazypath)
 
 require('lazy').setup({
 
-    {
-        "alexghergh/nvim-tmux-navigation",
-        lazy = false,
-        config = function()
-            local nvim_tmux_nav = require('nvim-tmux-navigation')
-
-            nvim_tmux_nav.setup {
-                disable_when_zoomed = true -- defaults to false
-            }
-
-            vim.keymap.set('n', "<a-h>", nvim_tmux_nav.NvimTmuxNavigateLeft)
-            vim.keymap.set('n', "<a-j>", nvim_tmux_nav.NvimTmuxNavigateDown)
-            vim.keymap.set('n', "<a-k>", nvim_tmux_nav.NvimTmuxNavigateUp)
-            vim.keymap.set('n', "<a-l>", nvim_tmux_nav.NvimTmuxNavigateRight)
-            vim.keymap.set('n', "<a-\\>", nvim_tmux_nav.NvimTmuxNavigateLastActive)
-            vim.keymap.set('n', "<a-Space>", nvim_tmux_nav.NvimTmuxNavigateNext)
-        end,
-    },
-    -- {
-    --     "christoomey/vim-tmux-navigator",
-    --     lazy = false,
-    --     cmd = {
-    --         "TmuxNavigateLeft",
-    --         "TmuxNavigateDown",
-    --         "TmuxNavigateUp",
-    --         "TmuxNavigateRight",
-    --         -- "TmuxNavigatePrevious",
-    --     },
-    --     keys = {
-    --         -- { "<c-leader>h>", "<cmd>TmuxNavigateLeft<cr>" },
-    --         -- { "<c-leader>j>", "<cmd>TmuxNavigateDown<cr>" },
-    --         -- { "<c-leader>k",  "<cmd>TmuxNavigateUp<cr>" },
-    --         -- { "<c-leader>l",  "<cmd>TmuxNavigateRight<cr>" },
-    --         { "<a-h>", "<cmd>TmuxNavigateLeft<cr>" },
-    --         { "<a-j>", "<cmd>TmuxNavigateDown<cr>" },
-    --         { "<a-k",  "<cmd>TmuxNavigateUp<cr>" },
-    --         { "<a-l",  "<cmd>TmuxNavigateRight<cr>" },
-    --     },
-    -- },
     -- Floaterm is required for calling lazygit inside nvim
     {
         'voldikss/vim-floaterm',
@@ -60,11 +21,9 @@ require('lazy').setup({
             { "<leader>lg", "<cmd>FloatermNew --width=0.85 --height=0.85 lazygit <cr>", desc = "Launch lazygit in Floaterm" },
         },
     },
-    --
     -- Useful plugin to show you pending keybinds.
     {
         'folke/which-key.nvim',
-        lazy = false,
         keys = {
             { "<leader>tk", "<cmd>Telescope keymaps<CR>", desc = "Telescope keymaps" },
         },
@@ -91,14 +50,11 @@ require('lazy').setup({
 
     },
 
-    -- Detect tabstop and shiftwidth automatically
-    -- {
-    --     'tpope/vim-sleuth', lazy = false
-    -- },
-
     {
         'numToStr/Comment.nvim',
-        lazy = false,
+        keys = {
+            { "<leader>/", "<cmd>CommentToggle<cr>", desc = "Toggle comment" },
+        },
         config = function()
             require('Comment').setup()
             vim.keymap.set('n', '<leader>/', function()
@@ -156,7 +112,6 @@ require('lazy').setup({
 
     {
         "folke/todo-comments.nvim",
-        lazy = false,
         dependencies = { "nvim-lua/plenary.nvim" },
         keys = { { '<leader>tt', "<cmd>TodoTelescope<cr>", desc = 'Telescope Todos', }, },
         opts = {},
@@ -180,7 +135,7 @@ require('lazy').setup({
 
     {
         'WhoIsSethDaniel/mason-tool-installer',
-        lazy = false,
+        event = 'VeryLazy',
         opts = {
             ensure_installed = {
                 'groovyls',
@@ -212,8 +167,8 @@ require('lazy').setup({
                 },
             },
         },
-        { "Bilal2453/luvit-meta", lazy = true }, -- optional `vim.uv` typings
-        {                                        -- optional completion source for require statements and module annotations
+        { "Bilal2453/luvit-meta" }, -- optional `vim.uv` typings
+        {                           -- optional completion source for require statements and module annotations
             "hrsh7th/nvim-cmp",
             opts = function(_, opts)
                 opts.sources = opts.sources or {}
@@ -258,7 +213,7 @@ require('lazy').setup({
     -- Adds git related signs to the gutter, as well as utilities for managing changes
     {
         'lewis6991/gitsigns.nvim',
-        lazy = false,
+        event = "VeryLazy",
         opts = {
             -- See `:help gitsigns.txt`
             signs = {
@@ -345,9 +300,9 @@ require('lazy').setup({
 
     {
         -- Set lualine as statusline
-        'nvim-lualine/lualine.nvim',
         -- See `:help lualine.txt`
-        lazy = false,
+        'nvim-lualine/lualine.nvim',
+        event = "VeryLazy",
         opts = {
             options = {
                 icons_enabled = false,
@@ -370,7 +325,7 @@ require('lazy').setup({
     {
         'lukas-reineke/indent-blankline.nvim',
         main = 'ibl',
-        lazy = false,
+        event = "VeryLazy",
         opts = {},
     },
 
@@ -452,7 +407,14 @@ require('lazy').setup({
             vim.g.copilot_no_tab_map = true
         end,
         keys = {
-            { "<leader>cl", function() print('Load Github CoPilot'); end, desc = "Copilot: load plugin" },
+            {
+                "<leader>cl",
+                function()
+                    print('Load Github CoPilot');
+                    vim.cmd('Copilot enable')
+                end,
+                desc = "Copilot: load plugin"
+            },
         },
     },
 
