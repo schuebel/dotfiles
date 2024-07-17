@@ -15,6 +15,8 @@ if status is-interactive
   alias ls='ls --color=auto'
   alias ..='cd ..'
   alias rlf='readlink -f'
+  alias vn="NVIM_APPNAME=neorg nvim ~/notes/test.norg"
+
 
   # FZF config
   # excludes are handled via $HOME/.ignore
