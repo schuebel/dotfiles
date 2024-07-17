@@ -1,5 +1,6 @@
 -- [[ Configure Telescope ]]
 -- See `:help telescope` and `:help telescope.setup()`
+-- local lga_actions = require("telescope-live-grep-args.actions")
 require('telescope').setup {
     defaults = {
         mappings = {
@@ -9,11 +10,22 @@ require('telescope').setup {
             },
         },
     },
-    require('telescope').load_extension("live_grep_args")
+    extensions = {
+        live_grep_args = {
+            auto_quoting = true, -- enable/disable auto-quoting
+            -- define mappings, e.g.
+            mappings = {         -- extend mappings
+                i = {
+                    ["<C-k>"] = require("telescope-live-grep-args.actions").quote_prompt(),
+                },
+            },
+        }
+    }
 }
 
 -- Enable telescope fzf native, if installed
 pcall(require('telescope').load_extension, 'fzf')
+pcall(require('telescope').load_extension, 'live_grep_args')
 
 local function find_git_root()
     -- Use the current buffer's path as the starting point for the git search
