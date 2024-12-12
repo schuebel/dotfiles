@@ -15,7 +15,11 @@ if status is-interactive
   alias ls='ls --color=auto'
   alias ..='cd ..'
   alias rlf='readlink -f'
-  alias vn="NVIM_APPNAME=neorg nvim ~/notes/test.norg"
+  # alias vn="NVIM_APPNAME=neorg nvim ~/notes/test.norg"
+  alias vn="NVIM_APPNAME=neorg nvim ~/notes/"
+  alias please="eval sudo (history -1 | string trim)"
+  alias c="cd ~/code/(ls -1 ~/code/ | fzf)"
+  alias cr="cat ~/.cmd_ref | fzf | pbcopy"
 
 
   # FZF config
@@ -33,9 +37,18 @@ if status is-interactive
     docker container exec -it $argv[1] /bin/bash
   end
 
+  function org
+      set MODULE $argv[1].norg
+      set -x NVIM_APPNAME neorg
+      cd ~/notes/
+      nvim $MODULE
+  end
+
   zoxide init fish | source
 
   # set Jenkins ENV vars
   source ~/.set_jenkins_env_vars.sh
 
 end
+uv generate-shell-completion fish | source
+uvx --generate-shell-completion fish | source

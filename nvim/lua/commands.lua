@@ -17,3 +17,14 @@ vim.api.nvim_create_user_command('ValidateJenkinsFile', function()
     local result = vim.fn.system(curl_cmd)
     print(result)
 end, { desc = 'Validate jenkinsfile' })
+
+
+-- function to trim trailing whitespace
+vim.cmd([[
+  command! TrimWhitespace lua TrimWhitespace()
+]])
+function TrimWhitespace()
+    local save = vim.fn.winsaveview()
+    vim.cmd([[keeppatterns %s/\s\+$//e]])
+    vim.fn.winrestview(save)
+end

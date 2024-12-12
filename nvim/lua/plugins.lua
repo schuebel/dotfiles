@@ -59,11 +59,14 @@ require('lazy').setup({
 
     },
 
-    { "nvim-pack/nvim-spectre" },
+    {
+        "nvim-pack/nvim-spectre",
+        cmd = { "Spectre" },
+    },
     {
         "OXY2DEV/markview.nvim",
 
-        lazy = false,
+        ft = "markdown",
         dependencies = {
             -- You may not need this if you don't lazy load
             -- Or if the parsers are in your $RUNTIMEPATH
@@ -74,6 +77,7 @@ require('lazy').setup({
     },
     {
         'numToStr/Comment.nvim',
+        lazy = false,
         keys = {
             { "<leader>/", "<cmd>CommentToggle<cr>", desc = "Toggle comment" },
         },
@@ -370,7 +374,11 @@ require('lazy').setup({
     -- Fuzzy Finder (files, lsp, etc)
     {
         'nvim-telescope/telescope.nvim',
+        cmd = 'Telescope',
         branch = '0.1.x',
+        config = function()
+            require('plugin-conf.telescope')
+        end,
         dependencies = {
             'nvim-telescope/telescope-live-grep-args.nvim',
             'nvim-lua/plenary.nvim',
@@ -480,4 +488,4 @@ require('lazy').setup({
 -- load some more plugin specific stuff
 require("plugin-conf.treesitter")
 require("plugin-conf.languages")
-require("plugin-conf.telescope")
+-- require("plugin-conf.telescope")
