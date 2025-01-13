@@ -126,3 +126,8 @@ vim.keymap.set('n', '<leader>sC', require('telescope.builtin').git_commits,
     { desc = '[S]earch git [C]ommits on directory' })
 vim.keymap.set("n", "<leader>sr", ":lua require('telescope').extensions.live_grep_args.live_grep_args()<CR>",
     { desc = '[S]earch with [r]ipgrep - supports args' })
+
+
+-- toggle Terminal
+vim.keymap.set('n', '<C-\\>', '<cmd>FloatermToggle<CR>', { desc = 'Toggle Floaterm' })
+vim.keymap.set('t', '<C-\\>', '<C-\\><C-n><cmd>q<CR>', { desc = 'Toggle Floaterm' })
