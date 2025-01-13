@@ -19,7 +19,7 @@ if status is-interactive
   alias vn="NVIM_APPNAME=neorg nvim ~/notes/"
   alias please="eval sudo (history -1 | string trim)"
   alias c="cd ~/code/(ls -1 ~/code/ | fzf)"
-  alias cr="cat ~/.cmd_ref | fzf | pbcopy"
+  alias cr="cat ~/notes/commands.norg | fzf | pbcopy"
 
 
   # FZF config
