@@ -19,6 +19,9 @@ require('lazy').setup({
         'voldikss/vim-floaterm',
         keys = {
             { "<leader>lg", "<cmd>FloatermNew --width=0.85 --height=0.85 lazygit <cr>", desc = "Launch lazygit in Floaterm" },
+            { "<C-\\>",     "<cmd>FloatermToggle<CR>",                                  mode = "n",                         desc = "Toggle Floaterm" },
+            { "<C-\\>",     "<C-\\><C-n><cmd>q<CR>",                                    mode = "t",                         desc = "Toggle Floaterm" },
+
         },
     },
     -- Useful plugin to show you pending keybinds.
