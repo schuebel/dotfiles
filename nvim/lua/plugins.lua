@@ -27,39 +27,11 @@ require('lazy').setup({
     -- Useful plugin to show you pending keybinds.
     {
         'folke/which-key.nvim',
+        lazy = false,
+
         keys = {
             { "<leader>tk", "<cmd>Telescope keymaps<CR>", desc = "Telescope keymaps" },
         },
-
-        config = function()
-            -- document existing key chains
-            require('which-key').register {
-                -- Suggested Spec:
-                { "<leader>c",  group = "[C]ode" },
-                { "<leader>c_", hidden = true },
-                { "<leader>d",  group = "[D]ocument" },
-                { "<leader>d_", hidden = true },
-                { "<leader>g",  group = "[G]it" },
-                { "<leader>g_", hidden = true },
-                { "<leader>h",  group = "Git [H]unk" },
-                { "<leader>h_", hidden = true },
-                { "<leader>r",  group = "[R]ename" },
-                { "<leader>r_", hidden = true },
-                { "<leader>s",  group = "[S]earch" },
-                { "<leader>s_", hidden = true },
-                { "<leader>t",  group = "[T]oggle" },
-                { "<leader>t_", hidden = true },
-                { "<leader>w",  group = "[W]orkspace" },
-                { "<leader>w_", hidden = true },
-            }
-            -- register which-key VISUAL mode
-            -- required for visual <leader>hs (hunk stage) to work
-            require('which-key').register({
-                { "<leader>",  group = "VISUAL <leader>", mode = "v" },
-                { "<leader>h", desc = "Git [H]unk",       mode = "v" },
-            }, { mode = 'v' })
-        end,
-
     },
 
     {
@@ -81,9 +53,6 @@ require('lazy').setup({
     {
         'numToStr/Comment.nvim',
         lazy = false,
-        keys = {
-            { "<leader>/", "<cmd>CommentToggle<cr>", desc = "Toggle comment" },
-        },
         config = function()
             require('Comment').setup()
             vim.keymap.set('n', '<leader>/', function()
@@ -93,7 +62,6 @@ require('lazy').setup({
                 "<ESC><cmd>lua require('Comment.api').toggle.linewise(vim.fn.visualmode())<CR>",
                 { desc = 'Toggle comment in visual mode' })
         end,
-        opts = { toggler = { line = '<leader>/' } }
     },
 
     -- file tree
@@ -453,22 +421,22 @@ require('lazy').setup({
         "github/copilot.vim",
         config = function()
             vim.g.copilot_no_tab_map = true
+            vim.cmd('Copilot restart')
         end,
-        keys = {
-            {
-                "<leader>cl",
-                function()
-                    print('Load Github CoPilot');
-                    vim.cmd('Copilot enable')
-                end,
-                desc = "Copilot: load plugin"
-            },
-        },
+        -- keys = {
+        --     {
+        --         "<leader>cl",
+        --         function()
+        --             print('Load Github CoPilot');
+        --         end,
+        --         desc = "Copilot: load plugin"
+        --     },
+        -- },
     },
 
     {
         "CopilotC-Nvim/CopilotChat.nvim",
-        branch = "canary",
+        branch = "main",
         dependencies = {
             { "github/copilot.vim" },    -- or github/copilot.vim
             { "nvim-lua/plenary.nvim" }, -- for curl, log wrapper
@@ -480,11 +448,41 @@ require('lazy').setup({
             width = 0.25,
         },
         opts = {
-            debug = true, -- Enable debugging
+            -- debug = true, -- Enable debugging
             -- See Configuration section for rest
         },
         -- See Commands section for default commands if you want to lazy load on them
     },
+    {
+        "folke/snacks.nvim",
+        priority = 1000,
+        lazy = false,
+        ---@type snacks.Config
+        opts = {
+            -- your configuration comes here
+            -- or leave it empty to use the default settings
+            -- refer to the configuration section below
+            animate = { enabled = true },
+            bigfile = { enabled = true },
+            dashboard = { enabled = true },
+            indent = { enabled = true },
+            gitbrowse = { enabled = true },
+            input = { enabled = true },
+            picker = { enabled = true },
+            notifier = { enabled = true },
+            quickfile = { enabled = true },
+            scratch = { enabled = true },
+            scroll = { enabled = true },
+            statuscolumn = { enabled = true },
+            toggle = { enabled = true },
+            words = { enabled = true },
+        },
+        keys = {
+            { "<leader>gB", function() Snacks.gitbrowse() end,      desc = "Git Browse",           mode = { "n", "v" } },
+            { "<leader>.",  function() Snacks.scratch() end,        desc = "Toggle Scratch Buffer" },
+            { "<leader>S",  function() Snacks.scratch.select() end, desc = "Select Scratch Buffer" },
+        }
+    }
 
 }, { defaults = { lazy = true } })
 
