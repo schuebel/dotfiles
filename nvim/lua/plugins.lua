@@ -24,16 +24,6 @@ require('lazy').setup({
 
         },
     },
-    -- Useful plugin to show you pending keybinds.
-    {
-        'folke/which-key.nvim',
-        lazy = false,
-
-        keys = {
-            { "<leader>tk", "<cmd>Telescope keymaps<CR>", desc = "Telescope keymaps" },
-        },
-    },
-
     {
         "nvim-pack/nvim-spectre",
         cmd = { "Spectre" },
@@ -484,6 +474,7 @@ require('lazy').setup({
             { "<leader>S",  function() Snacks.scratch.select() end,      desc = "Select Scratch Buffer" },
             { "<leader>gl", function() Snacks.picker.git_log_file() end, desc = "Git Log on file" },
             { "<leader>gL", function() Snacks.picker.git_log() end,      desc = "Git Log on entire repo" },
+            { "<leader>sk", function() Snacks.picker.keymaps() end,      desc = "Keymaps" },
         }
     },
     {
@@ -498,4 +489,3 @@ require('lazy').setup({
 -- load some more plugin specific stuff
 require("plugin-conf.treesitter")
 require("plugin-conf.languages")
--- require("plugin-conf.telescope")
