@@ -443,6 +443,7 @@ require('lazy').setup({
         },
         keys = {
             { "<leader>cl", function() print('Load Github CoPilot'); end, desc = "Copilot: load plugin" },
+            { "<leader>cc", '<cmd>CopilotChatToggle<CR>',                 desc = "Copilot: Open CopilotChat" },
         },
         window = {
             width = 0.25,
@@ -478,10 +479,18 @@ require('lazy').setup({
             words = { enabled = true },
         },
         keys = {
-            { "<leader>gB", function() Snacks.gitbrowse() end,      desc = "Git Browse",           mode = { "n", "v" } },
-            { "<leader>.",  function() Snacks.scratch() end,        desc = "Toggle Scratch Buffer" },
-            { "<leader>S",  function() Snacks.scratch.select() end, desc = "Select Scratch Buffer" },
+            { "<leader>gB", function() Snacks.gitbrowse() end,           desc = "Git Browse",            mode = { "n", "v" } },
+            { "<leader>.",  function() Snacks.scratch() end,             desc = "Toggle Scratch Buffer" },
+            { "<leader>S",  function() Snacks.scratch.select() end,      desc = "Select Scratch Buffer" },
+            { "<leader>gl", function() Snacks.picker.git_log_file() end, desc = "Git Log on file" },
+            { "<leader>gL", function() Snacks.picker.git_log() end,      desc = "Git Log on entire repo" },
         }
+    },
+    {
+        "nvzone/typr",
+        dependencies = "nvzone/volt",
+        opts = {},
+        cmd = { "Typr", "TyprStats" },
     }
 
 }, { defaults = { lazy = true } })

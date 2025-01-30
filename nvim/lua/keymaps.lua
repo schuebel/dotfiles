@@ -28,7 +28,6 @@ k('n', '<leader>ch', '<cmd>Copilot help<CR>', { desc = 'Copilot: help' })
 k('n', '<leader>ce', '<cmd>Copilot enable<CR>', { desc = 'Copilot: enable' })
 k('n', '<leader>cd', '<cmd>Copilot disable<CR>', { desc = 'Copilot: disable' })
 k('n', '<leader>cp', '<cmd>Copilot panel<CR>', { desc = 'Copilot: panel' })
-k('n', '<leader>cc', '<cmd>CopilotChatToggle<CR>', { desc = 'Copilot Chat: toggle' })
 k('i', '<C-u>', 'copilot#Accept("\\<CR>")', { desc = 'Copilot: use suggestion', expr = true, replace_keycodes = false })
 k('i', '<C-i>', '<Plug>(copilot-accept-word)', { desc = 'Copilot: use next suggested word' })
 k('n', '<leader>ccq', function()
@@ -120,9 +119,9 @@ vim.keymap.set('n', '<leader>rs', require('telescope.builtin').resume, { desc = 
 vim.keymap.set('n', '<leader>tc', require('telescope.builtin').commands, { desc = '[T]elescope [C]ommands' })
 vim.keymap.set('n', '<leader>to', require('telescope.builtin').treesitter, { desc = '[T]elescope Treesitter [O]bjects' })
 vim.keymap.set('n', '<leader>fw', ':LiveGrepGitRoot<cr>', { desc = '[S]earch by [G]rep on Git Root' })
-vim.keymap.set('n', '<leader>sc', require('telescope.builtin').git_bcommits,
-    { desc = '[S]earch git [c]ommits on buffer' })
-vim.keymap.set('n', '<leader>sC', require('telescope.builtin').git_commits,
-    { desc = '[S]earch git [C]ommits on directory' })
+-- vim.keymap.set('n', '<leader>sc', require('telescope.builtin').git_bcommits,
+--     { desc = '[S]earch git [c]ommits on buffer' })
+-- vim.keymap.set('n', '<leader>sC', require('telescope.builtin').git_commits,
+--     { desc = '[S]earch git [C]ommits on directory' })
 vim.keymap.set("n", "<leader>sr", ":lua require('telescope').extensions.live_grep_args.live_grep_args()<CR>",
     { desc = '[S]earch with [r]ipgrep - supports args' })
