@@ -456,7 +456,21 @@ require('lazy').setup({
             -- refer to the configuration section below
             animate = { enabled = true },
             bigfile = { enabled = true },
-            dashboard = { enabled = true },
+            dashboard = {
+                preset = {
+                    keys = {
+                        { icon = " ", key = "f", desc = "Find File", action = ":lua Snacks.dashboard.pick('files')" },
+                        { icon = " ", key = "n", desc = "New File", action = ":ene | startinsert" },
+                        { icon = " ", key = "g", desc = "Find Text", action = ":lua Snacks.dashboard.pick('live_grep')" },
+                        { icon = " ", key = "o", desc = "Recent Files", action = ":lua Snacks.dashboard.pick('oldfiles')" }, -- Changed key from 'r' to 'o'
+                        { icon = " ", key = "c", desc = "Config", action = ":lua Snacks.dashboard.pick('files', {cwd = vim.fn.stdpath('config')})" },
+                        { icon = " ", key = "s", desc = "Restore Session", section = "session" },
+                        { icon = "󰒲 ", key = "L", desc = "Lazy", action = ":Lazy", enabled = package.loaded.lazy ~= nil },
+                        { icon = " ", key = "q", desc = "Quit", action = ":qa" },
+                    },
+                },
+                enabled = true,
+            },
             indent = { enabled = true },
             gitbrowse = { enabled = true },
             input = { enabled = true },
@@ -483,8 +497,7 @@ require('lazy').setup({
             { "<leader>fc",       function() Snacks.picker.files({ cwd = vim.fn.stdpath("config") }) end, desc = "Find Config File" },
             { "<leader>ff",       function() Snacks.picker.files() end,                                   desc = "Find Files (respect ignores and hidden" },
             { "<leader>faf",      function() Snacks.picker.files({ ignored = true, hidden = true }) end,  desc = "Find all Files" },
-
-            { "<leader>fw",       function() Snacks.picker.grep({ dirs = { utils.get_git_root() } }) end, desc = "Fuzzy search in current buffer" },
+            { "<leader>gg",       function() Snacks.picker.grep({ dirs = { utils.get_git_root() } }) end, desc = "Fuzzy search in current buffer" },
 
             -- Examples
 
