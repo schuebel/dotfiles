@@ -20,7 +20,7 @@ if status is-interactive
   alias please="eval sudo (history -1 | string trim)"
   alias c="cd ~/code/(ls -1 ~/code/ | fzf)"
   alias cr="cat ~/notes/commands.norg | fzf | pbcopy"
-
+  alias tt="nvim --clean ~/.tt"
 
   # FZF config
   # excludes are handled via $HOME/.ignore
@@ -44,6 +44,10 @@ if status is-interactive
       nvim $MODULE
   end
 
+  function tm
+      tmux new-session -A -s $argv[1]
+  end
+
   zoxide init fish | source
 
   # set Jenkins ENV vars
@@ -52,3 +56,6 @@ if status is-interactive
 end
 uv generate-shell-completion fish | source
 uvx --generate-shell-completion fish | source
+
+# needed to hide minikube
+set --global tide_right_prompt_items status cmd_duration context jobs direnv node python rustc java php pulumi ruby go gcloud distrobox toolbox terraform aws nix_shell crystal elixir
