@@ -1,0 +1,20 @@
+promptToReturnFromSubprocess: false
+notARepository: 'skip'
+os:
+  editPreset: 'vim'
+  edit: 'nvim {{filename}}'
+  editAtLine: 'nvim +{{line}} {{filename}}'
+  # editAtLineAndWait: 'myeditor --block --line={{line}} {{filename}}'
+  # editInTerminal: true
+services:
+  'github.tools.sap': 'github:github.tools.sap'
+  'github.wdf.sap.corp': 'github:github.wdf.sap.corp'
+gui:
+  theme:
+    selectedLineBgColor:
+      - reverse
+git:
+  commitPrefix: 
+    pattern: "(build|asdf|docs|feat|fix|perf|refactor|style|test|chore)-(\\w+).*"
+    replace: '$1($2): '
+
