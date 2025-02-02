@@ -98,11 +98,19 @@ require('lazy').setup({
     --     },
     -- },
 
+    -- {
+    --     "folke/todo-comments.nvim",
+    --     dependencies = { "nvim-lua/plenary.nvim" },
+    --     keys = { { '<leader>tt', "<cmd>TodoTelescope<cr>", desc = 'Telescope Todos', }, },
+    --     opts = {},
+    -- },
     {
         "folke/todo-comments.nvim",
-        dependencies = { "nvim-lua/plenary.nvim" },
-        keys = { { '<leader>tt', "<cmd>TodoTelescope<cr>", desc = 'Telescope Todos', }, },
-        opts = {},
+        optional = true,
+        keys = {
+            { "<leader>st", function() Snacks.picker.todo_comments() end,                                          desc = "Todo" },
+            { "<leader>sT", function() Snacks.picker.todo_comments({ keywords = { "TODO", "FIX", "FIXME" } }) end, desc = "Todo/Fix/Fixme" },
+        },
     },
 
     {
@@ -334,28 +342,28 @@ require('lazy').setup({
 
 
     -- Fuzzy Finder (files, lsp, etc)
-    {
-        'nvim-telescope/telescope.nvim',
-        cmd = 'Telescope',
-        branch = '0.1.x',
-        config = function()
-            require('plugin-conf.telescope')
-        end,
-        dependencies = {
-            'nvim-telescope/telescope-live-grep-args.nvim',
-            'nvim-lua/plenary.nvim',
-            -- Fuzzy Finder Algorithm which requires local dependencies to be built.
-            -- Only load if `make` is available. Make sure you have the system
-            -- requirements installed.
-            {
-                'nvim-telescope/telescope-fzf-native.nvim',
-                build = 'make',
-                cond = function()
-                    return vim.fn.executable 'make' == 1
-                end,
-            },
-        },
-    },
+    -- {
+    --     'nvim-telescope/telescope.nvim',
+    --     cmd = 'Telescope',
+    --     branch = '0.1.x',
+    --     config = function()
+    --         require('plugin-conf.telescope')
+    --     end,
+    --     dependencies = {
+    --         'nvim-telescope/telescope-live-grep-args.nvim',
+    --         'nvim-lua/plenary.nvim',
+    --         -- Fuzzy Finder Algorithm which requires local dependencies to be built.
+    --         -- Only load if `make` is available. Make sure you have the system
+    --         -- requirements installed.
+    --         {
+    --             'nvim-telescope/telescope-fzf-native.nvim',
+    --             build = 'make',
+    --             cond = function()
+    --                 return vim.fn.executable 'make' == 1
+    --             end,
+    --         },
+    --     },
+    -- },
 
     -- Highlight, edit, and navigate code
     {
@@ -393,20 +401,20 @@ require('lazy').setup({
         },
     },
 
-    {
-        "LintaoAmons/cd-project.nvim",
-
-        keys = {
-            { "<leader>sp", "<cmd>CdProject<cr>", desc = "[S]earch [P]rojects" },
-        },
-        config = function()
-            require("cd-project").setup({
-                projects_picker = "telescope",
-                projects_config_filepath = vim.fs.normalize(vim.fn.stdpath("config") .. "/cd-project.nvim.json"),
-                choice_format = "path",
-            })
-        end
-    },
+    -- {
+    --     "LintaoAmons/cd-project.nvim",
+    --
+    --     keys = {
+    --         { "<leader>sp", "<cmd>CdProject<cr>", desc = "[S]earch [P]rojects" },
+    --     },
+    --     config = function()
+    --         require("cd-project").setup({
+    --             projects_picker = "telescope",
+    --             projects_config_filepath = vim.fs.normalize(vim.fn.stdpath("config") .. "/cd-project.nvim.json"),
+    --             choice_format = "path",
+    --         })
+    --     end
+    -- },
 
     {
         "github/copilot.vim",
@@ -494,15 +502,18 @@ require('lazy').setup({
             { "<leader>sk",       function() Snacks.picker.keymaps() end,                                 desc = "Keymaps" },
             { "<leader><leader>", function() Snacks.picker.buffers() end,                                 desc = "Buffers" },
             { "<leader>fo",       function() Snacks.picker.recent() end,                                  desc = "Recent" },
-            { "<leader>/",        function() Snacks.picker.grep() end,                                    desc = "Fuzzy search in current buffer" },
             { "<leader>fg",       function() Snacks.picker.git_files() end,                               desc = "Find Git Files" },
             { "<leader>fc",       function() Snacks.picker.files({ cwd = vim.fn.stdpath("config") }) end, desc = "Find Config File" },
             { "<leader>ff",       function() Snacks.picker.files() end,                                   desc = "Find Files (respect ignores and hidden" },
             { "<leader>faf",      function() Snacks.picker.files({ ignored = true, hidden = true }) end,  desc = "Find all Files" },
             { "<leader>gg",       function() Snacks.picker.grep({ dirs = { utils.get_git_root() } }) end, desc = "Grep in git repo" },
             { "<leader>ss",       function() Snacks.picker.lsp_symbols() end,                             desc = "LSP Symbols" },
+            { "<leader>sg",       function() Snacks.picker.grep() end,                                    desc = "Grep in cwd" },
+            { "<leader>?",        function() Snacks.picker.lines() end,                                   desc = "Grep in buffer" },
             { "<leader>c",        function() Snacks.picker.commands() end,                                desc = "Command pallete" },
             { "<C-n>",            function() Snacks.picker.explorer() end,                                desc = "Explorer" },
+            { "gd",               function() Snacks.picker.lsp_definitions() end,                         desc = "Goto Definition" },
+            { "gr",               function() Snacks.picker.lsp_references() end,                          nowait = true,                                  desc = "References" },
 
             {
                 "<leader>pc",
