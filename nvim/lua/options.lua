@@ -46,6 +46,3 @@ vim.opt.tabstop      = 4
 -- Use tabstop value to determine shiftwidth
 vim.opt.shiftwidth   = 0
 vim.opt.expandtab    = true
-
--- treat jenkinsfiles as groovy files
-vim.cmd('autocmd BufNewFile,BufRead *.jenkinsfile,*.Jenkinsfile set filetype=groovy')
