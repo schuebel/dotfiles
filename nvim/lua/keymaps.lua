@@ -14,11 +14,11 @@ k('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostics list' 
 -- Buffer navigation
 k('n', '<leader>x', function() vim.cmd.bdelete() end, { desc = 'Close Buffer' })
 
--- Pane navigation
-k('n', '<C-H>', "<C-w>h", { desc = 'Focus pane to the left' })
-k('n', '<C-J>', "<C-w>j", { desc = 'Focus pane to the bottom' })
-k('n', '<C-K>', "<C-w>k", { desc = 'Focus pane to the top' })
-k('n', '<C-L>', "<C-w>l", { desc = 'Focus pane to the right' })
+-- Window navigation with leader v
+k('n', '<leader>vh', '<C-w>h', { desc = 'Focus pane to the left' })
+k('n', '<leader>vj', '<C-w>j', { desc = 'Focus pane to the bottom' })
+k('n', '<leader>vk', '<C-w>k', { desc = 'Focus pane to the top' })
+k('n', '<leader>vl', '<C-w>l', { desc = 'Focus pane to the right' })
 
 k('n', '<C-A-\\>', "<cmd>vsp<CR>")
 k('n', '<A-`>', "<cmd>sp<CR>")
@@ -29,7 +29,9 @@ k('n', '<leader>ce', '<cmd>Copilot enable<CR>', { desc = 'Copilot: enable' })
 k('n', '<leader>cd', '<cmd>Copilot disable<CR>', { desc = 'Copilot: disable' })
 k('n', '<leader>cp', '<cmd>Copilot panel<CR>', { desc = 'Copilot: panel' })
 k('i', '<C-u>', 'copilot#Accept("\\<CR>")', { desc = 'Copilot: use suggestion', expr = true, replace_keycodes = false })
-k('i', '<C-i>', '<Plug>(copilot-accept-word)', { desc = 'Copilot: use next suggested word' })
+-- for whatever reason this does not work with the k function...
+vim.keymap.set('i', '<C-y>', '<Plug>(copilot-accept-word)')
+
 k('n', '<leader>ccq', function()
         local input = vim.fn.input("Quick Chat: ")
         if input ~= "" then
