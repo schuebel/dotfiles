@@ -56,47 +56,47 @@ require('lazy').setup({
     },
 
     -- file tree
-    {
-        "nvim-neo-tree/neo-tree.nvim",
-        init = function()
-            if vim.fn.argc(-1) == 1 then
-                local stat = vim.loop.fs_stat(vim.fn.argv(0))
-                if stat and stat.type == "directory" then require("neo-tree").setup({ filesystem = { hijack_netrw_behavior = "open_current", }, }) end
-            end
-        end,
-        keys = {
-            { "<C-n>",     "<cmd>Neotree toggle<cr>",      desc = "NeoTree" },
-            { '<leader>e', "<cmd>Neotree reveal=true<cr>", desc = 'NeoTree: Reveal file' },
-        },
-        branch = "v3.x",
-        dependencies = {
-            "nvim-lua/plenary.nvim",
-            "nvim-tree/nvim-web-devicons", -- not strictly required, but recommended
-            "MunifTanjim/nui.nvim",
-            'lewis6991/gitsigns.nvim',
-            -- "3rd/image.nvim", -- Optional image support in preview window: See `# Preview Mode` for more information
-        },
-        opts = {
-            hijack_netrw_behavior = 'open_current',
-            enable_diagnostics = false,
-            filtered_items = {
-                hide_gitignored = false,
-                always_show = {
-                    ".gitignore",
-                    ".config",
-                },
-            },
-            filesystem = {
-                window = {
-                    mappings = {
-                        -- disable fuzzy finder
-                        ["/"] = "noop",
-                        ["<c-/>"] = "fuzzy_finder",
-                    }
-                }
-            }
-        },
-    },
+    -- {
+    --     "nvim-neo-tree/neo-tree.nvim",
+    --     init = function()
+    --         if vim.fn.argc(-1) == 1 then
+    --             local stat = vim.loop.fs_stat(vim.fn.argv(0))
+    --             if stat and stat.type == "directory" then require("neo-tree").setup({ filesystem = { hijack_netrw_behavior = "open_current", }, }) end
+    --         end
+    --     end,
+    --     keys = {
+    --         -- { "<C-n>",     "<cmd>Neotree toggle<cr>",      desc = "NeoTree" },
+    --         -- { '<leader>e', "<cmd>Neotree reveal=true<cr>", desc = 'NeoTree: Reveal file' },
+    --     },
+    --     branch = "v3.x",
+    --     dependencies = {
+    --         "nvim-lua/plenary.nvim",
+    --         "nvim-tree/nvim-web-devicons", -- not strictly required, but recommended
+    --         "MunifTanjim/nui.nvim",
+    --         'lewis6991/gitsigns.nvim',
+    --         -- "3rd/image.nvim", -- Optional image support in preview window: See `# Preview Mode` for more information
+    --     },
+    --     opts = {
+    --         hijack_netrw_behavior = 'open_current',
+    --         enable_diagnostics = false,
+    --         filtered_items = {
+    --             hide_gitignored = false,
+    --             always_show = {
+    --                 ".gitignore",
+    --                 ".config",
+    --             },
+    --         },
+    --         filesystem = {
+    --             window = {
+    --                 mappings = {
+    --                     -- disable fuzzy finder
+    --                     ["/"] = "noop",
+    --                     ["<c-/>"] = "fuzzy_finder",
+    --                 }
+    --             }
+    --         }
+    --     },
+    -- },
 
     {
         "folke/todo-comments.nvim",
@@ -472,6 +472,7 @@ require('lazy').setup({
                 },
                 enabled = true,
             },
+            explorer = { enabled = true, replace_netrw = true, },
             indent = { enabled = true },
             gitbrowse = { enabled = true },
             input = { enabled = true },
@@ -500,6 +501,17 @@ require('lazy').setup({
             { "<leader>faf",      function() Snacks.picker.files({ ignored = true, hidden = true }) end,  desc = "Find all Files" },
             { "<leader>gg",       function() Snacks.picker.grep({ dirs = { utils.get_git_root() } }) end, desc = "Grep in git repo" },
             { "<leader>ss",       function() Snacks.picker.lsp_symbols() end,                             desc = "LSP Symbols" },
+            { "<leader>c",        function() Snacks.picker.commands() end,                                desc = "Command pallete" },
+            { "<C-n>",            function() Snacks.picker.explorer() end,                                desc = "Explorer" },
+
+            {
+                "<leader>pc",
+                function()
+                    local actions = require("CopilotChat.actions")
+                    require("CopilotChat.integrations.snacks").pick(actions.prompt_actions())
+                end,
+                desc = "CopilotChat - Prompt actions",
+            },
         }
     },
     {

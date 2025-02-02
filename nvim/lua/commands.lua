@@ -1,3 +1,5 @@
+local utils = require('utils')
+
 -- vim.api.nvim_create_user_command("CopyRelPath", "call setreg('*', expand('%'))", {})
 vim.api.nvim_create_user_command("YankParentDirPath",
     function()
@@ -17,6 +19,16 @@ vim.api.nvim_create_user_command('ValidateJenkinsFile', function()
     local result = vim.fn.system(curl_cmd)
     print(result)
 end, { desc = 'Validate jenkinsfile' })
+
+-- function to cd into the git root directory
+vim.api.nvim_create_user_command('CdGitRoot', function()
+    local git_root = utils.get_git_root()
+    if git_root then
+        vim.cmd('cd ' .. git_root)
+    else
+        vim.notify('Not in a git repository', 'error')
+    end
+end, { desc = 'Change directory to the root of the git repository' })
 
 
 -- function to trim trailing whitespace
