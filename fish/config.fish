@@ -1,7 +1,4 @@
 if status is-interactive
-  # enable vi mode
-  # fish_vi_key_bindings
-
   # vars
   export FZF_DEFAULT_COMMAND='rg --files --hidden --ignore-file ~/.ignore'
   # Aliases

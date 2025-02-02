@@ -433,8 +433,9 @@ require('lazy').setup({
             { "nvim-lua/plenary.nvim" }, -- for curl, log wrapper
         },
         keys = {
-            { "<leader>cl", function() print('Load Github CoPilot'); end, desc = "Copilot: load plugin" },
-            { "<leader>cc", '<cmd>CopilotChatToggle<CR>',                 desc = "Copilot: Open CopilotChat" },
+            { "<leader>cl",  function() print('Load Github CoPilot'); end, desc = "Copilot: load plugin" },
+            { "<leader>cc",  '<cmd>CopilotChatToggle<CR>',                 desc = "Copilot: Open CopilotChat" },
+            { "<leader>gcm", '<cmd>CopilotChatCommit<CR>',                 desc = "Copilot: Generate commit message" },
         },
         window = {
             width = 0.25,
