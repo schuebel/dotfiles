@@ -15,10 +15,7 @@ k('n', '<leader>q', vim.diagnostic.setloclist, { desc = 'Open diagnostics list' 
 k('n', '<leader>x', function() vim.cmd.bdelete() end, { desc = 'Close Buffer' })
 
 -- Window navigation with leader v
-k('n', '<leader>vh', '<C-w>h', { desc = 'Focus pane to the left' })
-k('n', '<leader>vj', '<C-w>j', { desc = 'Focus pane to the bottom' })
-k('n', '<leader>vk', '<C-w>k', { desc = 'Focus pane to the top' })
-k('n', '<leader>vl', '<C-w>l', { desc = 'Focus pane to the right' })
+k('n', '<leader>v', '<C-w>', { noremap = true })
 
 k('n', '<C-A-\\>', "<cmd>vsp<CR>")
 k('n', '<A-`>', "<cmd>sp<CR>")
