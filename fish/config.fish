@@ -12,7 +12,6 @@ if status is-interactive
   alias ls='ls --color=auto'
   alias ..='cd ..'
   alias rlf='readlink -f'
-  # alias vn="NVIM_APPNAME=neorg nvim ~/notes/test.norg"
   alias vn="NVIM_APPNAME=neorg nvim ~/notes/"
   alias please="eval sudo (history -1 | string trim)"
   alias c="cd ~/code/(ls -1 ~/code/ | fzf)"
@@ -34,6 +33,7 @@ if status is-interactive
     docker container exec -it $argv[1] /bin/bash
   end
 
+  # nvim neorg
   function org
       set MODULE $argv[1].norg
       set -x NVIM_APPNAME neorg
@@ -41,9 +41,20 @@ if status is-interactive
       nvim $MODULE
   end
 
+  # tmux session
   function tm
       tmux new-session -A -s $argv[1]
   end
+
+  # run todo sort after every todo command
+  function t
+    todo $argv
+    clear
+    todo sort
+    todo list
+  end
+
+
 
   zoxide init fish | source
 
